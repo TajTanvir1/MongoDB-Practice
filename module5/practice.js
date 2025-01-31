@@ -15,6 +15,9 @@ db.test.find({
     .project({ skills: 1 })
 
 // 4. Find documents where the person has skills in both "JavaScript" and "Java."
+db.test.find({skills: { $elemMatch: {name: "JAVASCRIPT", name: "JAVA"} }})
+.project({ skills : 1 })
+.sort({ skills:1 })
 
 // 5. Add a new skill to the skills array for the document with the email "amccurry3@cnet.com". The skill is
 // {"name": "Python"

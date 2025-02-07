@@ -26,3 +26,12 @@ $out - To create a new output/collection with selected fields
 $marge - To modify collection
         {$marge: "Collection Name"}
 
+$group - To find by title data
+        {$group : {_id: "$address.country", count : {$sum : 1}}}
+        result - _id : country names, count : same data number
+
+        $push - works on $group to see more fields
+        {$group : {_id: "$address.country", count : {$sum : 1}, doc : {$push : "$name"}}}
+        {$group : {_id: "$address.country", count : {$sum : 1}, doc : {$push : "$$ROOT"}}} // $$ROOT to see all data
+
+

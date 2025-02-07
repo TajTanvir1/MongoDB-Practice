@@ -29,31 +29,21 @@ $ne     Matches all values that are not equal to a specified value.
 
 $nin    Matches none of the values specified in an array.
 
-$and    
-
-$or
-
-$exits
-
-$type
-
-$size
-
-$all
-
-$elemMatch
-
-$set
-
-$addToSet
-
-$push
-
-$pop
-
-$pull
-
-$pullAll
+Query Operators:
+$and → Matches documents that satisfy all conditions.
+$or → Matches documents that satisfy at least one condition.
+$exists → Checks if a field exists (true or false).
+$type → Matches fields based on their BSON data type.
+$size → Matches arrays with a specific length.
+$all → Matches arrays containing all specified elements.
+$elemMatch → Matches arrays with at least one element satisfying conditions.
+Update Operators (Array Modifiers):
+$set → Updates or adds a field with a new value.
+$addToSet → Adds a value to an array if it doesn’t exist.
+$push → Adds a value to an array.
+$pop → Removes first (-1) or last (1) element from an array.
+$pull → Removes specific elements from an array.
+$pullAll → Removes multiple specific values from an array.
 
 
     ex

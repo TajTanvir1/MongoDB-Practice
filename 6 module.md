@@ -77,3 +77,20 @@ $bucket - Use to set boundaries to divide some condition
             //stage-3
             {$project: {count:1}}
         ])
+
+$facet - To use multiple Pipeline in one aggregation
+        db.test.aggregate([
+         {$facet: {
+            //pipeline-1
+            "interestsCount": [
+                //stage-1
+                { $unwind: "$interests" },
+                //stage
+                {$group: { _id: "$interests", count: { $sum: 1 } }}],
+            //pipeline-2
+            "friendsCount":[
+                //stage-1
+                {$unwind: "$friends"},
+                //stage
+                {$group: { _id: "$friends", count: {$sum: 1}}}]
+          }}])

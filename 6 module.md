@@ -16,6 +16,9 @@ $project - Give the data we want to see
             {$project: {name:1, age:1, gender:1}}
         ])
 
+        We can modify title with $project
+        {$project: {fullName: "name"}} //data will given as fullName
+
 $addfields - Only apply to the document in the pipeline, does not modifies to original
             {$addfields: {course: "Level-2"}}
 
@@ -34,4 +37,23 @@ $group - To find by title data
         {$group : {_id: "$address.country", count : {$sum : 1}, doc : {$push : "$name"}}}
         {$group : {_id: "$address.country", count : {$sum : 1}, doc : {$push : "$$ROOT"}}} // $$ROOT to see all data
 
+        if we use push then we have to use ush title in project
+        {$project: {"doc.name":1, "doc.email":1}}
 
+        we can use in $group - $count, $max, $min, $avg, $sum, $push
+
+        to sum all data values
+        {$group: {
+            _id: null,  //null uses as all data
+            totalSalary: {$sum: "$salary"}
+        }}
+
+        We can not work directly on array, so we need to divide in several times by array data
+        db.test.aggregate([
+            {
+                $unwind: "$arrayTitle"
+            },
+            {
+                $group: {_id:"age", interestsPerAge: {$push: "$interests" }}
+            }
+        ])

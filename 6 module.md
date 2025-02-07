@@ -16,4 +16,13 @@ $project - Give the data we want to see
             {$project: {name:1, age:1, gender:1}}
         ])
 
-        
+$addfields - Only apply to the document in the pipeline, does not modifies to original
+            {$addfields: {course: "Level-2"}}
+
+
+$out - To create a new output/collection with selected fields
+        {$out : "New-Collection-Name"}
+
+$marge - To modify collection
+        {$marge: "Collection Name"}
+

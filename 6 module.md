@@ -57,3 +57,23 @@ $group - To find by title data
                 $group: {_id:"age", interestsPerAge: {$push: "$interests" }}
             }
         ])
+
+
+$bucket - Use to set boundaries to divide some condition
+          db.test.aggregate([
+            //stage-1
+            {
+                $bucket: {
+                      groupBy: "$age",
+                      boundaries: [ 20, 40, 60,80 ],
+                      default: "Others",
+                      output: {
+                        "count": { $sum: 1 },
+                        "titles" : { $push: "$$ROOT" }
+                      }},
+            },
+            //stage-2
+            {$sort: {count: -1}            },
+            //stage-3
+            {$project: {count:1}}
+        ])

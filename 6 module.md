@@ -94,3 +94,25 @@ $facet - To use multiple Pipeline in one aggregation
                 //stage
                 {$group: { _id: "$friends", count: {$sum: 1}}}]
           }}])
+
+
+$lookup - use to get data fom another collection
+          db.orders.aggregate([
+         {
+        $lookup: {
+               from: "test",  //collection name to get data
+               localField: "userId", //get data by title
+               foreignField: "_id", //another collection title name
+               as: "user" //we want to see as title of data
+             }
+         }
+        ])
+
+explain - to see all data fetch details
+        db.test.find({_id : ObjectId("6406ad63fc13ae5a40000065"}).explain("executionStats")
+
+index - to get data by indexing in short time
+        db.getCollection("massive-data").createIndex({email: 1})
+
+        to delete index
+        db.getCollection("massive-data").dropIndex({email: 1})

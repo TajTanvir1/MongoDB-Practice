@@ -116,3 +116,9 @@ index - to get data by indexing in short time
 
         to delete index
         db.getCollection("massive-data").dropIndex({email: 1})
+        
+        To Search easily in short time
+        step -1 create Indexing
+        db.getCollection("massive-data").createIndex({ about: "text"})
+        step -2 searching option
+        db.getCollection("massive-data").find({ $text : { $search : "dolor"} }).project({about : 1})

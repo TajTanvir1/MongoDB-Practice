@@ -1,5 +1,5 @@
-to get total from several data
-
+"use strict";
+// to get total from several data
 db.Oders2.aggregate([
     {
         $facet: {
@@ -18,12 +18,12 @@ db.Oders2.aggregate([
                     }
                 },
                 {
-                    $group: { _id: "$null", totalSale:{$sum: "$orderTotal"}}
+                    $group: { _id: "null", totalSale: { $sum: "$orderTotal" } }
                 },
                 {
-                    $project: {_id: 0, totalSale: 1}
+                    $project: { _id: 0, totalSale: 1 }
                 }
             ]
         }
     }
-])
+]);

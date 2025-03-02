@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.8",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.8.2",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "start": "node dist/app/server.js",
+    "dev": "nodemon --ext ts --exec ts-node src/app/server.js",
+    "build": "tsc"
+  }
+}

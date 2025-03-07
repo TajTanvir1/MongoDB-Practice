@@ -12,3 +12,8 @@ Steps of Download and Use MongoDb Mongoose
 8. restart cmd -> mongod --version (it will mongodb version)
 9. cmd - mongosh (it will show connection data)
 10. Download & install- No sql booster (for better graphical interface) https://nosqlbooster.com/downloads
+
+
+
+
+

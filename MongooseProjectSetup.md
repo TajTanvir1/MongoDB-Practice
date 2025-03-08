@@ -170,7 +170,15 @@ change tsconfig outDir - "./dist"
     search - Typescript eslint prettier setup - https://blog.logrocket.com/linting-typescript-eslint-prettier/
 
 
-    
+17. to create TypeScript compiler settings - tsc --init
+    This will generate a default TypeScript configuration file
+    Change the config.tsc -
+        rootDir = 'src'
+        outDir = 'dist'
+
+19. Install ESlint - npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+
+20. 
 
 
 

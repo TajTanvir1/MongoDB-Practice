@@ -168,6 +168,12 @@ change tsconfig outDir - "./dist"
 
 16. To formate code and setup eslint
     search - Typescript eslint prettier setup - https://blog.logrocket.com/linting-typescript-eslint-prettier/
+    or
+    https://dev.to/shafayat/-express-typescript-eslint-prettiersetup-5fhg?fbclid=IwZXh0bgNhZW0CMTAAAR16ZSmft2XrDXtvVZIRiT1bPvJOTvT47kSdMrp5sBcTDz8J8mZC20Y8kfc_aem_MnKOKaQYzgl_7N38FGonig
+
+16.2. add in tsconfig.json file which file include & exclude
+    "include": ["src"], // which files to compile
+    "exclude": ["node_modules"], // which files to skip
 
 
 17. to create TypeScript compiler settings - tsc --init
@@ -176,9 +182,95 @@ change tsconfig outDir - "./dist"
         rootDir = 'src'
         outDir = 'dist'
 
-19. Install ESlint - npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+19. Install ESlint - 
+    <!-- npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev -->
+    npm i -D eslint@9.14.0 @eslint/js @types/eslint__js typescript typescript-eslint
 
-20. 
+20. Setup Eslint - 
+        npx eslint --init
+    will see a series of questions
+        how would like to use? -> to check syntax & find prb
+        what type of module? -> import/export
+        which framework use? -> react or none of these
+        use typescript? -> Yes
+        Browser? -> node (if browser select press i)
+        what formate want in config? -> json
+        like to install? -> Yes
+        package manager? -> npm
+
+    At this point you may see that your version of eslint: "^9.14.0" has been changed in package.json to eslint: "^9.15.0"
+
+    if that happens remove the eslint : npm remove eslint
+    Then re-install: npm i -D eslint@9.14.0
 
 
+20.2 add rules in .eslint.config.mjs
+    in rule option -
+        "no-unused-vars": "error",
+
+20.3. ignore files - eslint.config.mjs
+     {
+     ignores: ["node_modules", "dist"],
+     rules: {
+      "no-unused-vars": "error",
+        },
+     },
+     <!-- ]  // before 3rd array -->
+
+20.4. add scripts to run easily
+        "scripts": {
+            <!-- There can be more others -->
+     "lint": "eslint src/**/*.ts",
+     "lint:fix": "eslint src/**/*.ts --fix"
+     },
+
+     run in terminal - npm run lint (to check errors)
+     if any problem come with fixable
+     run in terminal - npm run lint:fix
+
+
+21. Adding Prettier
+    <!-- npm install --save-dev prettier -->
+    npm i -D --exact prettier
+
+22. Prettier doesn’t need a config file, meaning you can run and use it straight away. However, if you want to set a config, you will need to create a file called .prettierrc.json in the project’s root directory, where you can define your format options.
+
+create in root - .prettierrc.json
+       {
+  "semi": true, // Specify if you want to print semicolons at the end of statements
+  "singleQuote": true, // If you want to use single quotes
+  <!-- "arrowParens": "avoid", // Include parenthesis around a sole arrow function parameter -->
+    }
+
+    create in root - .prettierignore
+        dist //will not work in dist
+
+23. We can add for short access in script - package.json
+        "format": "prettier . --write"
+    run in terminal - npm run format
+        to do all formatting
+
+    <!-- We Can start formatting our code using Prettier -->
+    <!-- npx prettier --write src/index.ts -->
+
+
+<!-- 24. add the Prettier command to our scripts 
+    "scripts": {
+    "dev": "tsc --watch",
+    "lint": "eslint --ext .js,.ts .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
+    },
+
+Now, you can run the npm run format command to format and fix all your code
+
+25. In VSCode, go to the extensions tab, look for the Prettier extension, and ensure it’s enabled. Once enabled, we need to configure a few things in VSCode.
+
+You can open your command palette (Command + Shift + P) and look for Preferences: Open User Settings (JSON). Then you’ll need to change your editor’s default formatter and add an extra config to format code when you save your files:
+
+// settings.json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  ...
+} -->
 

@@ -49,10 +49,12 @@ Mongoose - npm install mongoose --save
 Cors npm - npm i cors
 dotenv - npm i dotenv
 
-4. Need to config TS file - tsc -init
+npm i express cors dotenv
 
-change tsconfig rootDir - "./src"
-change tsconfig outDir - "./dist"
+4. Need to config TS file - tsc -init
+    tsc -init
+        change tsconfig rootDir - "./src"
+        change tsconfig outDir - "./dist"
 
 
 5. create in root - src (folder) , app.ts (file in src folder)
@@ -274,3 +276,34 @@ You can open your command palette (Command + Shift + P) and look for Preferences
   ...
 } -->
 
+24. We can setup some rules in - .eslintrc.json
+
+    "rules" :{
+        "no-unused-vars":"error",
+        "no-unused-expression": "error",  //error if unused any function
+        "prefer_const":"error",   //will error if using let but not reused
+        "no-console":"warn",  //should be warn cause we must have to console in
+                                server  but not others
+        "no-undef":"error"  //error when variable not used
+    },
+    "globals"{
+    "process":"readonly"   
+    }
+
+25. we should create .gitignore before connect git
+        .gitignore->
+            node_modules
+            dist
+            .env
+
+26. we need to update server automatically so we need to install 
+       search - ts-node-dev
+             npm i ts-node-dev --save-dev
+
+    we should save in script in package.json
+        "start:prod":"node ./dist/server.js",
+        "start:dev":"ts-node-dev --respawn --transpile-only src/server.ts",
+
+    as we work as development so we should write in .env
+        NODE_ENV=development   //after production we should use production
+        

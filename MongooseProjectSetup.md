@@ -33,6 +33,10 @@ routes.ts → Defines Express routes.
 controller.ts → Handles business logic.
 service.ts → Handles database queries and reusable logic.
 
+* Files works like
+Client -> req -> route.ts -> req -> controller.ts 
+        -> req -><- res - service -> req -><- res - Database (mongoose)
+
 
 
 # Setup
@@ -89,7 +93,7 @@ npm i express cors dotenv
     import dotenv from 'dotenv'
     import path from 'path'
     
-    dotenv.config({path: path.join((process.cwd(), '.env))})
+    dotenv.config({path: path.join((process.cwd(), '.env'))})
 
     export default{
         port: process.env.PORT,
@@ -130,25 +134,29 @@ npm i express cors dotenv
       res.send('Hello World!')
     })
 
+    export default app;
+
 14. We should use try catch syntax to catch error - server.ts
 
     import mongoose from "mongoose";
 
     import config from "./app/config"; //auto imported when write config
+    import app from "./app";
 
     async function main() {
-     try{
-     await mongoose.connect(config.database_url as string);
-     }
+      try {
+        await mongoose.connect(config.database_url as string);
 
-     app.listen(config.port, () => {
-      console.log(`Example app listening on port ${config.port}`)
-     })
-     }catch(err){
-        console.log(err)
-     }
+        app.listen(config.port, () => {
+          console.log(`Example app listening on port ${config.port}`);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
 
-15. As we work with json so we need parser of json & need cors
+
+15. As we work with json so we need parser of json & need cors - server.ts
 
     import cors from 'cors' // need to install cors type declaration
             from  suggestion (npm i --save-d @type/cors)
@@ -176,13 +184,14 @@ npm i express cors dotenv
 16.2. add in tsconfig.json file which file include & exclude
     "include": ["src"], // which files to compile
     "exclude": ["node_modules"], // which files to skip
+        //after top { bracket }
 
 
-17. to create TypeScript compiler settings - tsc --init
+<!-- 17. to create TypeScript compiler settings - tsc --init
     This will generate a default TypeScript configuration file
     Change the config.tsc -
         rootDir = 'src'
-        outDir = 'dist'
+        outDir = 'dist' -->
 
 19. Install ESlint - 
     <!-- npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev -->
@@ -219,7 +228,7 @@ npm i express cors dotenv
      },
      <!-- ]  // before 3rd array -->
 
-20.4. add scripts to run easily
+20.4. add scripts to run easily - package.json
         "scripts": {
             <!-- There can be more others -->
      "lint": "eslint src/**/*.ts",
@@ -250,7 +259,7 @@ create in root - .prettierrc.json
 23. We can add for short access in script - package.json
         "format": "prettier . --write"
     run in terminal - npm run format
-        to do all formatting
+            to do all formatting
 
     <!-- We Can start formatting our code using Prettier -->
     <!-- npx prettier --write src/index.ts -->
